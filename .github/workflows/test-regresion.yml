@@ -19,14 +19,19 @@ jobs:
           python-version: '3.10'
 
       - name: Instalar dependencias
+        working-directory: cupones-api
         run: |
           python -m venv venv
           source venv/bin/activate
-          pip install -r cupones-api/requirements.txt
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest
 
       - name: Ejecutar pruebas
+        working-directory: cupones-api
         env:
           PYTHONPATH: .
         run: |
           source venv/bin/activate
-          pytest
+          pytest tests
+
